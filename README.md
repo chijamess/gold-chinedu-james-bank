@@ -1,48 +1,48 @@
 # 🏦 Gold Chinedu-James Bank
 
-A modern and responsive banking website built using HTML, CSS, and JavaScript. The project showcases a clean, user-friendly interface designed for a modern digital banking experience.
+A modern, responsive banking website built with **HTML5, CSS3, and JavaScript**. This project showcases a professional digital banking interface with a focus on clean design, responsiveness, and an intuitive user experience across desktop and mobile devices.
 
 ## 🌐 Live Demo
 
+**Website:**  
 https://chijamess.github.io/gold-chinedu-james-bank/
 
-*(Update this link after enabling GitHub Pages.)*
+## ✨ Key Features
 
----
+- Responsive and mobile-friendly design
+- Modern banking homepage
+- Clean and intuitive user interface
+- Interactive navigation
+- Professional layout and styling
+- Optimized for desktop and mobile viewing
 
-## ✨ Features
-
-- Responsive design
-- Modern banking interface
-- User-friendly navigation
-- Mobile-friendly layout
-- Interactive UI
-- Clean and professional design
-
----
-
-## 🛠️ Technologies Used
+## 🛠️ Built With
 
 - HTML5
 - CSS3
 - JavaScript
 
----
+## 🚀 Getting Started
 
-## 🚀 Installation
+Clone the repository:
 
 ```bash
 git clone https://github.com/chijamess/gold-chinedu-james-bank.git
 ```
 
-Open `index.html` in your browser.
+Open `index.html` in your preferred web browser to explore the website locally.
 
----
+## 📂 Repository
+
+https://github.com/chijamess/gold-chinedu-james-bank
 
 ## 👨‍💻 Author
 
 **James Chinedu**
 
-GitHub: https://github.com/chijamess
+- GitHub: https://github.com/chijamess
+- Email: odimegwujamess@gmail.com
 
-Email: chinedujameskingj@gmail.com
+---
+
+⭐ *If you found this project interesting, consider giving it a star on GitHub.*
