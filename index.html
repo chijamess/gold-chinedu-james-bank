@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gold Chinedu-James Bank — Digital Banking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0e2420;
+    --ink-deep:#081916;
+    --ink-soft:#5c6b62;
+    --brass:#c68a3e;
+    --brass-bright:#e0a75c;
+    --sage:#5f8f6e;
+    --sage-soft:#e4ede4;
+    --paper:#eef1ec;
+    --card:#ffffff;
+    --line:#dde1d9;
+    --error:#b3483c;
+    --error-soft:#f6e4e1;
+    --radius:14px;
+    --maxw:1180px;
+    --display:'Sora', system-ui, sans-serif;
+    --body:'Inter', system-ui, sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+  }
+  html[data-theme="dark"]{
+    --paper:#0b1613;
+    --ink:#e9efe9;
+    --ink-soft:#93a49b;
+    --card:#12211d;
+    --line:#213631;
+    --sage-soft:#173129;
+    --error-soft:#2c1a17;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:var(--body); background:var(--paper); color:var(--ink);
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+    transition:background .25s ease, color .25s ease;
+  }
+  a{ color:inherit; } img,svg{ display:block; max-width:100%; }
+  :focus-visible{ outline:3px solid var(--brass); outline-offset:2px; }
+  @media (prefers-reduced-motion: reduce){ *{ animation-duration:0.001s !important; transition-duration:0.001s !important; } }
+
+  .skip-link{ position:absolute; left:-9999px; top:0; background:var(--brass); color:var(--ink-deep); padding:10px 16px; font-weight:600; z-index:300; }
+  .skip-link:focus{ left:10px; top:10px; }
+
+  /* header */
+  .site-header{ position:sticky; top:0; z-index:100; background:var(--ink-deep); border-bottom:1px solid rgba(198,138,62,.25); }
+  .header-inner{ max-width:var(--maxw); margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:14px 24px; gap:14px; }
+  .brand{ display:flex; align-items:center; gap:11px; text-decoration:none; cursor:pointer; border:none; background:none; }
+  .brand-mark{ width:38px; height:38px; border-radius:10px; background:linear-gradient(155deg,var(--brass-bright),var(--brass) 70%); display:flex; align-items:center; justify-content:center; font-family:var(--display); font-weight:800; color:var(--ink-deep); font-size:.82rem; letter-spacing:-.5px; flex-shrink:0; }
+  .brand-text{ font-family:var(--display); color:#fff; font-size:1.05rem; font-weight:700; letter-spacing:-.2px; }
+  .brand-text span{ display:block; font-family:var(--body); font-size:.6rem; letter-spacing:1.6px; text-transform:uppercase; color:var(--brass-bright); font-weight:600; margin-top:2px; }
+  .header-right{ display:flex; align-items:center; gap:10px; }
+  .icon-btn{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); color:#fff; width:38px; height:38px; border-radius:9px; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .icon-btn:hover{ background:rgba(255,255,255,.14); }
+  nav.primary-nav{ display:flex; align-items:center; gap:4px; }
+  nav.primary-nav button{ background:none; border:none; color:rgba(255,255,255,.8); font-family:var(--body); font-size:.88rem; font-weight:500; padding:9px 12px; border-radius:8px; cursor:pointer; white-space:nowrap; }
+  nav.primary-nav button:hover{ background:rgba(255,255,255,.08); color:#fff; }
+  nav.primary-nav button[aria-current="page"]{ color:var(--ink-deep); background:var(--brass); font-weight:600; }
+  .nav-toggle{ display:none; background:none; border:1px solid rgba(255,255,255,.3); border-radius:8px; color:#fff; width:40px; height:40px; cursor:pointer; font-size:1.2rem; }
+  @media (max-width:900px){
+    nav.primary-nav{ position:absolute; top:100%; left:0; right:0; background:var(--ink-deep); flex-direction:column; align-items:stretch; padding:8px 16px 16px; border-bottom:1px solid rgba(198,138,62,.25); display:none; }
+    nav.primary-nav.open{ display:flex; }
+    nav.primary-nav button{ text-align:left; width:100%; padding:12px 14px; }
+    .nav-toggle{ display:flex; align-items:center; justify-content:center; }
+  }
+
+  main{ min-height:60vh; }
+  section{ display:none; }
+  section.active{ display:block; animation:fadein .35s ease; }
+  @keyframes fadein{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+
+  /* hero */
+  .hero{ background:radial-gradient(ellipse 900px 500px at 85% -10%, rgba(198,138,62,.18), transparent 60%), linear-gradient(165deg, var(--ink-deep), var(--ink) 60%); color:#fff; padding:76px 24px 64px; position:relative; overflow:hidden; }
+  .hero-inner{ max-width:var(--maxw); margin:0 auto; position:relative; z-index:1; display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center; }
+  @media (max-width:900px){ .hero-inner{ grid-template-columns:1fr; } }
+  .eyebrow{ display:inline-flex; align-items:center; gap:8px; font-size:.78rem; letter-spacing:1.6px; text-transform:uppercase; color:var(--brass-bright); font-weight:600; margin-bottom:20px; }
+  .eyebrow::before{ content:""; width:26px; height:1px; background:var(--brass-bright); }
+  .hero h1{ font-family:var(--display); font-weight:700; font-size:clamp(2rem,4.6vw,3.1rem); line-height:1.1; margin-bottom:18px; letter-spacing:-.5px; }
+  .hero h1 em{ font-style:normal; color:var(--brass-bright); }
+  .hero p.lede{ font-size:1.05rem; color:rgba(255,255,255,.75); max-width:480px; margin-bottom:30px; }
+  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{ display:inline-flex; align-items:center; gap:8px; font-family:var(--body); font-weight:600; font-size:.94rem; padding:13px 24px; border-radius:9px; cursor:pointer; border:1px solid transparent; transition:transform .15s ease, background .15s ease; }
+  .btn:active{ transform:translateY(1px); }
+  .btn-brass{ background:var(--brass); color:var(--ink-deep); }
+  .btn-brass:hover{ background:var(--brass-bright); }
+  .btn-ghost{ background:transparent; color:#fff; border-color:rgba(255,255,255,.35); }
+  .btn-ghost:hover{ background:rgba(255,255,255,.08); }
+  .btn-outline{ background:transparent; color:var(--ink); border-color:var(--line); }
+  .btn-outline:hover{ background:var(--sage-soft); }
+  .btn-danger{ background:var(--error); color:#fff; }
+  .btn-sm{ padding:8px 14px; font-size:.82rem; }
+  .btn:disabled{ opacity:.55; cursor:default; }
+
+  /* mock phone card in hero */
+  .phone-mock{ background:var(--card); border-radius:22px; padding:20px; box-shadow:0 30px 70px rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.08); color:var(--ink); max-width:340px; margin:0 auto; }
+  .phone-balance-card{ background:linear-gradient(150deg,var(--ink-deep),var(--ink) 70%); border-radius:14px; padding:20px; color:#fff; position:relative; overflow:hidden; }
+  .phone-balance-card small{ color:rgba(255,255,255,.6); font-size:.72rem; letter-spacing:.8px; text-transform:uppercase; }
+  .phone-balance-card .amt{ font-family:var(--mono); font-size:1.7rem; font-weight:600; margin-top:6px; letter-spacing:-.5px; }
+  .sparkline{ position:absolute; right:-10px; bottom:-4px; opacity:.5; width:160px; }
+  .phone-rows{ margin-top:16px; display:flex; flex-direction:column; gap:10px; }
+  .phone-row{ display:flex; justify-content:space-between; font-size:.82rem; padding:8px 0; border-bottom:1px solid var(--line); }
+  .phone-row small{ display:block; color:var(--ink-soft); font-size:.72rem; }
+
+  /* generic sections */
+  .section-pad{ padding:64px 24px; }
+  .section-head{ max-width:620px; margin-bottom:42px; }
+  .section-head .eyebrow{ color:var(--brass); }
+  .section-head .eyebrow::before{ background:var(--brass); }
+  .section-head h2{ font-family:var(--display); font-size:clamp(1.6rem,3vw,2.1rem); font-weight:700; letter-spacing:-.4px; color:var(--ink); }
+  .section-head p{ color:var(--ink-soft); margin-top:10px; }
+
+  .feature-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  @media (max-width:900px){ .feature-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:600px){ .feature-grid{ grid-template-columns:1fr; } }
+  .feature-card{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:26px; }
+  .feature-card .icon{ width:40px; height:40px; border-radius:10px; background:var(--sage-soft); display:flex; align-items:center; justify-content:center; font-size:1.15rem; margin-bottom:16px; }
+  .feature-card h3{ font-family:var(--display); font-size:1.02rem; margin-bottom:8px; }
+  .feature-card p{ color:var(--ink-soft); font-size:.9rem; }
+
+  .band-alt{ background:var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+
+  footer{ background:var(--ink-deep); color:rgba(255,255,255,.65); padding:40px 24px; font-size:.85rem; }
+  footer .wrap{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+
+  /* auth */
+  .auth-wrap{ max-width:440px; margin:0 auto; padding:56px 24px 80px; }
+  .auth-card{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:34px 30px; }
+  .auth-card h2{ font-family:var(--display); font-size:1.4rem; margin-bottom:6px; }
+  .auth-card p.sub{ color:var(--ink-soft); font-size:.88rem; margin-bottom:26px; }
+  .role-toggle{ display:flex; background:var(--paper); border-radius:9px; padding:4px; margin-bottom:22px; }
+  .role-toggle button{ flex:1; background:none; border:none; padding:9px; border-radius:6px; font-family:var(--body); font-weight:600; font-size:.84rem; cursor:pointer; color:var(--ink-soft); }
+  .role-toggle button.active{ background:var(--card); color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,.08); }
+  .field{ margin-bottom:16px; }
+  .field label{ display:block; font-size:.82rem; font-weight:600; margin-bottom:6px; }
+  .field input, .field select{ width:100%; padding:11px 13px; border-radius:8px; border:1px solid var(--line); background:var(--paper); color:var(--ink); font-family:var(--body); font-size:.92rem; }
+  .field input:focus, .field select:focus{ outline:none; border-color:var(--brass); background:var(--card); }
+  .form-msg{ display:none; padding:11px 13px; border-radius:8px; font-size:.85rem; margin-bottom:16px; }
+  .form-msg.show{ display:block; }
+  .form-msg.error{ background:var(--error-soft); color:var(--error); }
+  .form-msg.success{ background:var(--sage-soft); color:var(--sage); }
+  .auth-switch{ text-align:center; margin-top:18px; font-size:.86rem; color:var(--ink-soft); }
+  .auth-switch button{ background:none; border:none; color:var(--brass); font-weight:600; cursor:pointer; font-size:.86rem; }
+  .demo-note{ background:var(--sage-soft); border-radius:8px; padding:10px 12px; font-size:.78rem; color:var(--ink-soft); margin-bottom:18px; }
+
+  /* dashboard */
+  .dash-shell{ max-width:var(--maxw); margin:0 auto; padding:30px 24px 70px; display:grid; grid-template-columns:220px 1fr; gap:28px; }
+  @media (max-width:900px){ .dash-shell{ grid-template-columns:1fr; } }
+  .dash-tabs{ display:flex; flex-direction:column; gap:3px; }
+  @media (max-width:900px){ .dash-tabs{ flex-direction:row; overflow-x:auto; gap:6px; padding-bottom:6px; } }
+  .dash-tabs button{ text-align:left; background:none; border:none; padding:11px 14px; border-radius:9px; font-family:var(--body); font-size:.9rem; font-weight:500; color:var(--ink-soft); cursor:pointer; white-space:nowrap; }
+  .dash-tabs button:hover{ background:var(--card); }
+  .dash-tabs button.active{ background:var(--ink-deep); color:#fff; font-weight:600; }
+  .dash-panel{ display:none; }
+  .dash-panel.active{ display:block; animation:fadein .3s ease; }
+  .dash-head{ font-family:var(--display); font-size:1.5rem; font-weight:700; margin-bottom:20px; letter-spacing:-.4px; }
+
+  .balance-card{ background:linear-gradient(150deg,var(--ink-deep),var(--ink) 75%); border-radius:18px; padding:28px; color:#fff; position:relative; overflow:hidden; margin-bottom:24px; }
+  .balance-card small{ color:rgba(255,255,255,.6); font-size:.75rem; letter-spacing:1px; text-transform:uppercase; }
+  .balance-top{ display:flex; justify-content:space-between; align-items:flex-start; }
+  .balance-amt{ font-family:var(--mono); font-size:2.2rem; font-weight:600; margin-top:8px; letter-spacing:-1px; }
+  .balance-amt.hidden-amt{ filter:blur(9px); user-select:none; }
+  .eye-toggle{ background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); color:#fff; width:34px; height:34px; border-radius:8px; cursor:pointer; font-size:.9rem; }
+  .balance-meta{ margin-top:16px; font-size:.8rem; color:rgba(255,255,255,.6); font-family:var(--mono); }
+  .quick-actions{ display:flex; gap:12px; margin-top:22px; flex-wrap:wrap; }
+  .quick-actions button{ background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18); color:#fff; padding:10px 16px; border-radius:9px; font-size:.85rem; font-weight:500; cursor:pointer; }
+  .quick-actions button:hover{ background:rgba(255,255,255,.18); }
+
+  .grid-2{ display:grid; grid-template-columns:1.3fr 1fr; gap:22px; }
+  @media (max-width:800px){ .grid-2{ grid-template-columns:1fr; } }
+  .card-block{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:22px; }
+  .card-block h3{ font-family:var(--display); font-size:1.02rem; margin-bottom:14px; }
+
+  .tx-row{ display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid var(--line); }
+  .tx-row:last-child{ border-bottom:none; }
+  .tx-left{ display:flex; align-items:center; gap:12px; }
+  .tx-icon{ width:36px; height:36px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+  .tx-icon.credit{ background:var(--sage-soft); color:var(--sage); }
+  .tx-icon.debit{ background:var(--error-soft); color:var(--error); }
+  .tx-title{ font-size:.88rem; font-weight:600; }
+  .tx-sub{ font-size:.76rem; color:var(--ink-soft); }
+  .tx-amt{ font-family:var(--mono); font-size:.88rem; font-weight:600; }
+  .tx-amt.credit{ color:var(--sage); } .tx-amt.debit{ color:var(--error); }
+
+  .ring-row{ display:flex; align-items:center; gap:14px; padding:12px 0; border-bottom:1px solid var(--line); }
+  .ring-row:last-child{ border-bottom:none; }
+  .ring-info{ flex:1; }
+  .ring-info .cat{ font-size:.86rem; font-weight:600; }
+  .ring-info .amts{ font-size:.76rem; color:var(--ink-soft); font-family:var(--mono); }
+  .ring-bar-track{ height:7px; background:var(--paper); border-radius:5px; margin-top:6px; overflow:hidden; }
+  .ring-bar-fill{ height:100%; background:var(--brass); border-radius:5px; }
+  .ring-bar-fill.over{ background:var(--error); }
+
+  .goal-card{ border:1px solid var(--line); border-radius:12px; padding:16px; margin-bottom:14px; }
+  .goal-card:last-child{ margin-bottom:0; }
+  .goal-top{ display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+  .goal-top b{ font-size:.92rem; }
+  .goal-top span{ font-family:var(--mono); font-size:.78rem; color:var(--ink-soft); }
+
+  .cards-carousel{ display:flex; gap:16px; overflow-x:auto; padding-bottom:8px; }
+  .paycard{ min-width:280px; height:170px; border-radius:16px; padding:20px; color:#fff; position:relative; flex-shrink:0; }
+  .paycard.virtual{ background:linear-gradient(150deg,var(--ink-deep),var(--ink) 80%); }
+  .paycard.physical{ background:linear-gradient(150deg,#3d2c14,var(--brass) 120%); }
+  .paycard.frozen{ filter:grayscale(1) brightness(.8); }
+  .paycard .pc-top{ display:flex; justify-content:space-between; font-size:.72rem; text-transform:uppercase; letter-spacing:1px; opacity:.75; }
+  .paycard .pc-num{ font-family:var(--mono); font-size:1.05rem; margin-top:32px; letter-spacing:2px; }
+  .paycard .pc-bottom{ display:flex; justify-content:space-between; margin-top:20px; font-size:.72rem; }
+  .add-card-btn{ min-width:280px; height:170px; border-radius:16px; border:2px dashed var(--line); background:none; cursor:pointer; color:var(--ink-soft); font-size:.88rem; flex-shrink:0; }
+  .card-actions{ display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
+
+  .empty-state{ text-align:center; padding:30px 12px; color:var(--ink-soft); font-size:.88rem; }
+  .toast{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--ink-deep); color:#fff; padding:13px 22px; border-radius:9px; font-size:.88rem; opacity:0; pointer-events:none; transition:all .3s ease; z-index:400; }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  .available-list-row{ display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--line); }
+  .available-list-row:last-child{ border-bottom:none; }
+
+  .visually-hidden{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+
+  /* notifications */
+  .notif-wrap{ position:relative; }
+  .notif-dot{ position:absolute; top:6px; right:6px; width:8px; height:8px; border-radius:50%; background:var(--brass-bright); border:1.5px solid var(--ink-deep); display:none; }
+  .notif-dot.show{ display:block; }
+  .notif-panel{ position:absolute; top:46px; right:0; width:300px; background:var(--card); border:1px solid var(--line); border-radius:12px; box-shadow:0 20px 50px rgba(0,0,0,.25); z-index:200; display:none; max-height:360px; overflow-y:auto; }
+  .notif-panel.open{ display:block; }
+  .notif-panel-head{ padding:14px 16px; font-weight:600; font-size:.86rem; border-bottom:1px solid var(--line); color:var(--ink); }
+  .notif-item{ padding:12px 16px; border-bottom:1px solid var(--line); font-size:.82rem; color:var(--ink); }
+  .notif-item:last-child{ border-bottom:none; }
+  .notif-item small{ display:block; color:var(--ink-soft); font-size:.72rem; margin-top:3px; }
+  .notif-empty{ padding:24px 16px; text-align:center; color:var(--ink-soft); font-size:.84rem; }
+
+  /* pin modal */
+  .modal-backdrop{ position:fixed; inset:0; background:rgba(6,20,17,.6); z-index:300; display:none; align-items:center; justify-content:center; padding:20px; }
+  .modal-backdrop.open{ display:flex; }
+  .modal-box{ background:var(--card); border-radius:14px; padding:26px; width:100%; max-width:340px; text-align:center; }
+  .modal-box h3{ font-family:var(--display); font-size:1.1rem; margin-bottom:6px; }
+  .modal-box p{ color:var(--ink-soft); font-size:.84rem; margin-bottom:18px; }
+  .pin-input{ width:100%; text-align:center; letter-spacing:10px; font-family:var(--mono); font-size:1.3rem; padding:12px; border-radius:9px; border:1px solid var(--line); background:var(--paper); color:var(--ink); margin-bottom:14px; }
+  .pin-input:focus{ outline:none; border-color:var(--brass); }
+  .modal-actions{ display:flex; gap:10px; }
+  .modal-actions .btn{ flex:1; justify-content:center; }
+  .pin-error{ color:var(--error); font-size:.8rem; margin:-8px 0 12px; display:none; }
+  .pin-error.show{ display:block; }
+
+  /* bills */
+  .biller-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:18px; }
+  @media (max-width:600px){ .biller-grid{ grid-template-columns:1fr 1fr; } }
+  .biller-tile{ border:1px solid var(--line); border-radius:11px; padding:14px 10px; text-align:center; background:none; cursor:pointer; font-family:var(--body); color:var(--ink); }
+  .biller-tile.active{ border-color:var(--brass); background:var(--sage-soft); }
+  .biller-tile .glyph{ font-size:1.3rem; margin-bottom:6px; }
+  .biller-tile .lbl{ font-size:.78rem; font-weight:600; }
+
+  /* insights chart */
+  .bar-chart-row{ display:grid; grid-template-columns:110px 1fr 90px; align-items:center; gap:10px; padding:10px 0; }
+  .bar-chart-row .lbl{ font-size:.84rem; font-weight:600; }
+  .bar-track{ height:10px; background:var(--paper); border-radius:6px; overflow:hidden; }
+  .bar-fill{ height:100%; background:linear-gradient(90deg,var(--brass),var(--brass-bright)); border-radius:6px; }
+  .bar-amt{ font-family:var(--mono); font-size:.78rem; color:var(--ink-soft); text-align:right; }
+  .insight-summary{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:24px; }
+  @media (max-width:700px){ .insight-summary{ grid-template-columns:1fr; } }
+  .insight-stat{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px; }
+  .insight-stat small{ color:var(--ink-soft); font-size:.72rem; text-transform:uppercase; letter-spacing:.8px; }
+  .insight-stat .val{ font-family:var(--mono); font-size:1.3rem; font-weight:600; margin-top:6px; }
+
+  /* KYC step */
+  .kyc-icon{ width:52px; height:52px; border-radius:50%; background:var(--sage-soft); display:flex; align-items:center; justify-content:center; font-size:1.4rem; margin:0 auto 14px; }
+  .kyc-spinner{ display:none; align-items:center; gap:10px; justify-content:center; padding:14px 0; font-size:.86rem; color:var(--ink-soft); }
+  .kyc-spinner.show{ display:flex; }
+  .spinner-ring{ width:16px; height:16px; border:2px solid var(--line); border-top-color:var(--brass); border-radius:50%; animation:spin .8s linear infinite; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+
+  /* account cards */
+  .accounts-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px; }
+  @media (max-width:700px){ .accounts-row{ grid-template-columns:1fr; } }
+  .acct-card{ border-radius:16px; padding:22px; color:#fff; position:relative; overflow:hidden; }
+  .acct-card.current{ background:linear-gradient(150deg,var(--ink-deep),var(--ink) 75%); }
+  .acct-card.savings{ background:linear-gradient(150deg,#3d2c14,var(--brass) 130%); }
+  .acct-card small{ color:rgba(255,255,255,.65); font-size:.72rem; letter-spacing:1px; text-transform:uppercase; }
+  .acct-card .acct-amt{ font-family:var(--mono); font-size:1.5rem; font-weight:600; margin-top:6px; letter-spacing:-.5px; }
+  .acct-amt.hidden-amt{ filter:blur(8px); user-select:none; }
+  .acct-card-top{ display:flex; justify-content:space-between; align-items:flex-start; }
+  .acct-card .eye-toggle{ width:30px; height:30px; font-size:.8rem; }
+  .acct-move-row{ display:flex; gap:8px; margin-top:16px; flex-wrap:wrap; }
+  .acct-move-row button{ background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2); color:#fff; padding:8px 12px; border-radius:8px; font-size:.78rem; cursor:pointer; }
+  .acct-move-row button:hover{ background:rgba(255,255,255,.2); }
+
+  /* filter bar */
+  .filter-bar{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr auto; gap:10px; margin-bottom:18px; align-items:end; }
+  @media (max-width:900px){ .filter-bar{ grid-template-columns:1fr 1fr; } }
+  .filter-bar .field{ margin-bottom:0; }
+  .filter-bar label{ display:block; font-size:.74rem; font-weight:600; margin-bottom:5px; color:var(--ink-soft); }
+  .filter-bar input, .filter-bar select{ width:100%; padding:9px 10px; border-radius:7px; border:1px solid var(--line); background:var(--paper); color:var(--ink); font-family:var(--body); font-size:.84rem; }
+  .from-select{ padding:11px 13px; border-radius:8px; border:1px solid var(--line); background:var(--paper); color:var(--ink); font-family:var(--body); font-size:.92rem; width:100%; }
+  .tx-sub-acct{ font-size:.7rem; padding:2px 7px; border-radius:5px; background:var(--paper); color:var(--ink-soft); margin-left:6px; }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <button class="brand" onclick="showTab('home')" aria-label="Gold Chinedu-James Bank home">
+      <span class="brand-mark">GCJ</span>
+      <span class="brand-text">Gold Chinedu-James<span>Digital Banking</span></span>
+    </button>
+    <nav class="primary-nav" id="primaryNav">
+      <button data-tab="home" aria-current="page" onclick="showTab('home')">Home</button>
+      <button data-tab="login" onclick="showTab('login')" id="navLogin">Log in</button>
+      <button data-tab="signup" onclick="showTab('signup')" id="navSignup">Open an account</button>
+      <button data-tab="dashboard" onclick="showTab('dashboard')" id="navDash" style="display:none">Dashboard</button>
+      <button onclick="logout()" id="navLogout" style="display:none">Log out</button>
+    </nav>
+    <div class="header-right">
+      <div class="notif-wrap" id="notifWrap" style="display:none">
+        <button class="icon-btn" onclick="toggleNotifPanel()" aria-label="Notifications">🔔<span class="notif-dot" id="notifDot"></span></button>
+        <div class="notif-panel" id="notifPanel">
+          <div class="notif-panel-head">Notifications</div>
+          <div id="notifList"></div>
+        </div>
+      </div>
+      <button class="icon-btn" onclick="toggleTheme()" aria-label="Toggle dark mode" id="themeBtn">◐</button>
+      <button class="nav-toggle" onclick="document.getElementById('primaryNav').classList.toggle('open')" aria-label="Toggle menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HOME -->
+  <section id="tab-home" class="active">
+    <div class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow">Built for how you actually spend</div>
+          <h1>Banking that shows its <em>work</em>.</h1>
+          <p class="lede">One balance, every card, every goal — laid out plainly so you always know where you stand before you move money.</p>
+          <div class="hero-actions">
+            <button class="btn btn-brass" onclick="showTab('signup')">Open an account</button>
+            <button class="btn btn-ghost" onclick="showTab('login')">I already bank here</button>
+          </div>
+        </div>
+        <div class="phone-mock">
+          <div class="phone-balance-card">
+            <small>Available balance</small>
+            <div class="amt">₦482,300.00</div>
+            <svg class="sparkline" viewBox="0 0 160 50" preserveAspectRatio="none"><polyline points="0,40 20,32 40,36 60,20 80,26 100,12 120,18 140,6 160,14" fill="none" stroke="#e0a75c" stroke-width="2"/></svg>
+          </div>
+          <div class="phone-rows">
+            <div class="phone-row"><span>Rent — Ada Properties<small>Today, 9:14am</small></span><span style="font-family:var(--mono)">−₦85,000</span></div>
+            <div class="phone-row"><span>Salary — Bluewave Ltd<small>Yesterday</small></span><span style="font-family:var(--mono);color:var(--sage)">+₦240,000</span></div>
+            <div class="phone-row"><span>Data — MTN<small>Mon</small></span><span style="font-family:var(--mono)">−₦3,500</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-pad">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Why Gold Chinedu-James Bank</div>
+          <h2>Everything about your money, in one place</h2>
+          <p>No hidden tabs, no jargon. Accounts, cards, budgets and goals share one clear layout.</p>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card"><div class="icon">⇄</div><h3>Instant transfers</h3><p>Send to any account number on the platform in seconds, with a running record of every move.</p></div>
+          <div class="feature-card"><div class="icon">◫</div><h3>Cards you control</h3><p>Spin up a virtual card for online spending, freeze it mid-scroll if something looks off.</p></div>
+          <div class="feature-card"><div class="icon">◔</div><h3>Budgets that warn early</h3><p>Set a ceiling per category and watch the bar fill — not a surprise at month end.</p></div>
+          <div class="feature-card"><div class="icon">◎</div><h3>Goals with a finish line</h3><p>Name what you're saving for, set a target, and contribute whenever you have spare cash.</p></div>
+          <div class="feature-card"><div class="icon">≡</div><h3>Full transaction history</h3><p>Every debit and credit, searchable and dated, no statement request required.</p></div>
+          <div class="feature-card"><div class="icon">◑</div><h3>Light or dark</h3><p>The whole app adapts, day screen or night screen, without losing contrast.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="band-alt section-pad">
+      <div class="wrap" style="text-align:center; max-width:560px; margin:0 auto;">
+        <h2 style="font-family:var(--display); font-size:1.6rem; margin-bottom:12px;">This is a working prototype</h2>
+        <p style="color:var(--ink-soft); margin-bottom:26px;">Every account, card and transaction here lives in your browser's storage. Open an account, transfer to another demo account, and watch the numbers move for real.</p>
+        <button class="btn btn-brass" onclick="showTab('signup')">Open an account</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGIN -->
+  <section id="tab-login">
+    <div class="auth-wrap">
+      <div class="auth-card">
+        <h2>Welcome back</h2>
+        <p class="sub">Log in to your Gold Chinedu-James Bank account.</p>
+        <div class="demo-note">Prototype data lives only in this browser. Clearing site data clears your account.</div>
+        <div class="form-msg" id="loginMessage"></div>
+        <form id="loginForm">
+          <div class="field"><label for="loginEmail">Email</label><input type="email" id="loginEmail" required autocomplete="email"></div>
+          <div class="field"><label for="loginPassword">Password</label><input type="password" id="loginPassword" required autocomplete="current-password"></div>
+          <button type="submit" class="btn btn-brass" style="width:100%; justify-content:center;">Log in</button>
+        </form>
+        <div class="auth-switch">No account yet? <button onclick="showTab('signup')">Open one</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNUP -->
+  <section id="tab-signup">
+    <div class="auth-wrap">
+      <div class="auth-card" id="signupStep1Card">
+        <h2>Open an account</h2>
+        <p class="sub">Takes a minute. You'll get a demo account number and starting balance.</p>
+        <div class="form-msg" id="signupMessage"></div>
+        <form id="signupForm">
+          <div class="field"><label for="signupName">Full name</label><input type="text" id="signupName" required autocomplete="name"></div>
+          <div class="field"><label for="signupEmail">Email</label><input type="email" id="signupEmail" required autocomplete="email"></div>
+          <div class="field"><label for="signupPassword">Password</label><input type="password" id="signupPassword" required minlength="4" autocomplete="new-password"></div>
+          <div class="field"><label for="signupPin">4-digit transaction PIN</label><input type="password" id="signupPin" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" required placeholder="••••"></div>
+          <button type="submit" class="btn btn-brass" style="width:100%; justify-content:center;">Continue</button>
+        </form>
+        <div class="auth-switch">Already banking with us? <button onclick="showTab('login')">Log in</button></div>
+      </div>
+
+      <div class="auth-card" id="signupStep2Card" style="display:none">
+        <div class="kyc-icon">🛡</div>
+        <h2 style="text-align:center">Verify your identity</h2>
+        <p class="sub" style="text-align:center">Nigerian banking regulation requires BVN and NIN verification before your account can be activated.</p>
+        <div class="form-msg" id="kycMessage"></div>
+        <form id="kycForm">
+          <div class="field"><label for="kycBvn">Bank Verification Number (BVN)</label><input type="text" id="kycBvn" inputmode="numeric" pattern="[0-9]{11}" maxlength="11" placeholder="11 digits" required></div>
+          <div class="field"><label for="kycNin">National Identity Number (NIN)</label><input type="text" id="kycNin" inputmode="numeric" pattern="[0-9]{11}" maxlength="11" placeholder="11 digits" required></div>
+          <div class="kyc-spinner" id="kycSpinner"><span class="spinner-ring"></span> Verifying with NIBSS...</div>
+          <button type="submit" class="btn btn-brass" style="width:100%; justify-content:center;" id="kycSubmitBtn">Verify and activate account</button>
+        </form>
+        <div class="auth-switch"><button onclick="cancelKyc()">Back</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section id="tab-dashboard">
+    <div class="dash-shell">
+      <div class="dash-tabs">
+        <button data-dash="overview" class="active" onclick="showDashPanel('overview')">Overview</button>
+        <button data-dash="transfer" onclick="showDashPanel('transfer')">Transfer</button>
+        <button data-dash="bills" onclick="showDashPanel('bills')">Pay bills</button>
+        <button data-dash="cards" onclick="showDashPanel('cards')">Cards</button>
+        <button data-dash="budgets" onclick="showDashPanel('budgets')">Budgets</button>
+        <button data-dash="goals" onclick="showDashPanel('goals')">Goals</button>
+        <button data-dash="insights" onclick="showDashPanel('insights')">Insights</button>
+        <button data-dash="history" onclick="showDashPanel('history')">Transactions</button>
+        <button data-dash="settings" onclick="showDashPanel('settings')">Settings</button>
+      </div>
+
+      <div>
+        <div class="dash-panel active" id="dashPanel-overview">
+          <div class="dash-head" id="dashHeading">Welcome back</div>
+          <div class="accounts-row">
+            <div class="acct-card current">
+              <div class="acct-card-top">
+                <div><small>Current account</small><div class="acct-amt" id="currentAmt">₦0.00</div></div>
+                <button class="eye-toggle" onclick="toggleBalanceVisibility()" id="eyeBtn" aria-label="Show or hide balances">◉</button>
+              </div>
+              <div class="balance-meta" id="acctNumberLine">Account · —</div>
+              <div class="acct-move-row">
+                <button onclick="showDashPanel('transfer')">Send money</button>
+                <button onclick="openAddMoney()">Add money</button>
+                <button onclick="moveBetweenAccounts('current','savings')">Move to savings</button>
+              </div>
+            </div>
+            <div class="acct-card savings">
+              <div class="acct-card-top">
+                <div><small>Savings account</small><div class="acct-amt" id="savingsAmt">₦0.00</div></div>
+              </div>
+              <div class="balance-meta">Earns toward your goals</div>
+              <div class="acct-move-row">
+                <button onclick="moveBetweenAccounts('savings','current')">Move to current</button>
+                <button onclick="showDashPanel('goals')">View goals</button>
+              </div>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="card-block">
+              <h3>Recent activity</h3>
+              <div id="overviewTx"></div>
+            </div>
+            <div class="card-block">
+              <h3>Budgets this month</h3>
+              <div id="overviewBudgets"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-panel" id="dashPanel-transfer">
+          <div class="dash-head">Transfer money</div>
+          <div class="grid-2">
+            <div class="card-block">
+              <h3>Send to a Gold Chinedu-James Bank account</h3>
+              <div class="form-msg" id="transferMessage"></div>
+              <form id="transferForm">
+                <div class="field"><label for="xferFrom">From</label>
+                  <select id="xferFrom" class="from-select">
+                    <option value="current">Current account</option>
+                    <option value="savings">Savings account</option>
+                  </select>
+                </div>
+                <div class="field"><label for="xferAcct">Recipient account number</label><input type="text" id="xferAcct" placeholder="10-digit account number" required></div>
+                <div class="field"><label for="xferAmt">Amount (₦)</label><input type="number" id="xferAmt" min="100" step="1" required></div>
+                <div class="field"><label for="xferNote">Note (optional)</label><input type="text" id="xferNote" placeholder="What's this for?"></div>
+                <button type="submit" class="btn btn-brass" style="width:100%; justify-content:center;">Send</button>
+              </form>
+            </div>
+            <div class="card-block">
+              <h3>Your account details</h3>
+              <p style="font-size:.88rem; color:var(--ink-soft); margin-bottom:10px;">Share this number so others can send you money.</p>
+              <div style="background:var(--paper); border-radius:9px; padding:14px; font-family:var(--mono); font-size:1.1rem;" id="ownAcctDisplay">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-panel" id="dashPanel-bills">
+          <div class="dash-head">Pay bills</div>
+          <div class="card-block" style="max-width:460px;">
+            <h3>Choose a biller</h3>
+            <div class="biller-grid" id="billerGrid"></div>
+            <div class="form-msg" id="billMessage"></div>
+            <form id="billForm">
+              <div class="field"><label for="billAccount" id="billAccountLabel">Phone / meter number</label><input type="text" id="billAccount" required></div>
+              <div class="field"><label for="billAmt">Amount (₦)</label><input type="number" id="billAmt" min="100" required></div>
+              <button type="submit" class="btn btn-brass" style="width:100%; justify-content:center;">Pay bill</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="dash-panel" id="dashPanel-cards">
+          <div class="dash-head">Cards</div>
+          <div class="cards-carousel" id="cardsCarousel"></div>
+          <div class="card-block" style="margin-top:22px;">
+            <h3>Card controls</h3>
+            <p style="font-size:.86rem; color:var(--ink-soft);">Freeze a card instantly if you've misplaced it, or spin up a fresh virtual card for one-off online purchases.</p>
+          </div>
+        </div>
+
+        <div class="dash-panel" id="dashPanel-budgets">
+          <div class="dash-head">Budgets</div>
+          <div class="grid-2">
+            <div class="card-block">
+              <h3>Category budgets</h3>
+              <div id="budgetList"></div>
+            </div>
+            <div class="card-block">
+              <h3>New budget</h3>
+              <div class="form-msg" id="budgetMessage"></div>
+              <form id="budgetForm">
+                <div class="field"><label for="budgetCat">Category</label><input type="text" id="budgetCat" placeholder="e.g. Transport" required></div>
+                <div class="field"><label for="budgetLimit">Monthly limit (₦)</label><input type="number" id="budgetLimit" min="500" required></div>
+                <button type="submit" class="btn btn-brass" style="width:100%; justify-content:center;">Add budget</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-panel" id="dashPanel-goals">
+          <div class="dash-head">Savings goals</div>
+          <div class="grid-2">
+            <div class="card-block">
+              <h3>Your goals</h3>
+              <div id="goalsList"></div>
+            </div>
+            <div class="card-block">
+              <h3>New goal</h3>
+              <div class="form-msg" id="goalMessage"></div>
+              <form id="goalForm">
+                <div class="field"><label for="goalName">Goal name</label><input type="text" id="goalName" placeholder="e.g. Rent renewal" required></div>
+                <div class="field"><label for="goalTarget">Target amount (₦)</label><input type="number" id="goalTarget" min="1000" required></div>
+                <button type="submit" class="btn btn-brass" style="width:100%; justify-content:center;">Create goal</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-panel" id="dashPanel-insights">
+          <div class="dash-head">Spending insights</div>
+          <div class="insight-summary" id="insightSummary"></div>
+          <div class="card-block">
+            <h3>This month, by category</h3>
+            <div id="insightChart"></div>
+          </div>
+        </div>
+
+        <div class="dash-panel" id="dashPanel-history">
+          <div class="dash-head">All transactions</div>
+          <div class="card-block">
+            <div class="filter-bar">
+              <div class="field"><label for="filtSearch">Search</label><input type="text" id="filtSearch" placeholder="Description..." oninput="renderFullHistory(getCurrentUser())"></div>
+              <div class="field"><label for="filtCategory">Category</label><select id="filtCategory" onchange="renderFullHistory(getCurrentUser())"><option value="">All</option></select></div>
+              <div class="field"><label for="filtFrom">From date</label><input type="date" id="filtFrom" onchange="renderFullHistory(getCurrentUser())"></div>
+              <div class="field"><label for="filtTo">To date</label><input type="date" id="filtTo" onchange="renderFullHistory(getCurrentUser())"></div>
+              <button class="btn btn-outline btn-sm" onclick="clearTxFilters()">Clear</button>
+            </div>
+            <div style="display:flex; justify-content:flex-end; margin-bottom:8px;">
+              <button class="btn btn-outline btn-sm" onclick="downloadStatement()">Download statement</button>
+            </div>
+            <div id="fullTxList"></div>
+          </div>
+        </div>
+
+        <div class="dash-panel" id="dashPanel-settings">
+          <div class="dash-head">Settings</div>
+          <div class="card-block" style="max-width:420px;">
+            <h3>Profile</h3>
+            <p style="font-size:.88rem; margin-bottom:6px;"><b id="setName">—</b></p>
+            <p style="font-size:.85rem; color:var(--ink-soft); margin-bottom:20px;" id="setEmail">—</p>
+            <button class="btn btn-outline btn-sm" onclick="logout()">Log out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="currentYear"></span> Gold Chinedu-James Bank. Prototype build — not a real bank.</span>
+    <span>Data stored locally in your browser only.</span>
+  </div>
+</footer>
+
+<div class="modal-backdrop" id="pinModal">
+  <div class="modal-box">
+    <h3>Enter your transaction PIN</h3>
+    <p id="pinModalSub">Confirm this payment to continue.</p>
+    <input type="password" class="pin-input" id="pinModalInput" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" autocomplete="off">
+    <div class="pin-error" id="pinModalError">Incorrect PIN. Try again.</div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closePinModal()">Cancel</button>
+      <button class="btn btn-brass" onclick="submitPinModal()">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  /* ================= STATE / STORAGE ================= */
+  const USERS_KEY = 'pv_users';
+  const SESSION_KEY = 'pv_session';
+  let currentUserEmail = localStorage.getItem(SESSION_KEY) || null;
+  let balanceVisible = true;
+
+  function getUsers(){ try{ return JSON.parse(localStorage.getItem(USERS_KEY)) || []; }catch(e){ return []; } }
+  function saveUsers(u){ localStorage.setItem(USERS_KEY, JSON.stringify(u)); }
+  function getCurrentUser(){ return getUsers().find(u => u.email === currentUserEmail) || null; }
+  function updateCurrentUser(patch){
+    const users = getUsers();
+    const idx = users.findIndex(u => u.email === currentUserEmail);
+    if (idx === -1) return;
+    users[idx] = { ...users[idx], ...patch };
+    saveUsers(users);
+  }
+  function isValidEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+  function fmtNaira(n){ return '₦' + Number(n).toLocaleString('en-NG', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+  function genAccountNumber(){
+    let num, users = getUsers();
+    do { num = String(Math.floor(1000000000 + Math.random()*8999999999)); }
+    while (users.some(u => u.accountNumber === num));
+    return num;
+  }
+  function initials(name){ return name.split(' ').filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join(''); }
+  function showToast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(()=>t.classList.remove('show'), 2600);
+  }
+  function showMessage(el, text, type){
+    el.textContent = text; el.className = 'form-msg show ' + type;
+  }
+
+  /* ================= NAV / TABS ================= */
+  function showTab(name){
+    if ((name === 'dashboard') && !currentUserEmail){ name = 'login'; }
+    if ((name === 'login' || name === 'signup') && currentUserEmail){ name = 'dashboard'; }
+    document.querySelectorAll('main > section').forEach(s => s.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    document.querySelectorAll('nav.primary-nav button[data-tab]').forEach(b => {
+      b.toggleAttribute('aria-current', b.dataset.tab === name);
+    });
+    document.getElementById('primaryNav').classList.remove('open');
+    window.scrollTo({top:0, behavior:'smooth'});
+    if (name === 'dashboard'){ loadDashboardForUser(getCurrentUser()); }
+    if (name === 'signup'){ resetSignupSteps(); }
+  }
+
+  function refreshAuthNav(){
+    const loggedIn = !!currentUserEmail;
+    document.getElementById('navLogin').style.display = loggedIn ? 'none' : '';
+    document.getElementById('navSignup').style.display = loggedIn ? 'none' : '';
+    document.getElementById('navDash').style.display = loggedIn ? '' : 'none';
+    document.getElementById('navLogout').style.display = loggedIn ? '' : 'none';
+    document.getElementById('notifWrap').style.display = loggedIn ? '' : 'none';
+  }
+
+  /* ================= THEME ================= */
+  function toggleTheme(){
+    const html = document.documentElement;
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    if (next === 'dark') html.setAttribute('data-theme','dark'); else html.removeAttribute('data-theme');
+    localStorage.setItem('pv_theme', next);
+  }
+  (function initTheme(){
+    if (localStorage.getItem('pv_theme') === 'dark') document.documentElement.setAttribute('data-theme','dark');
+  })();
+
+  /* ================= SEED DATA FOR NEW USER ================= */
+  function seedNewUser(fullName, email, password, pin){
+    const now = Date.now();
+    return {
+      fullName, email, password, pin,
+      accountNumber: genAccountNumber(),
+      accounts: { current: 100000, savings: 50000 },
+      transactions: [
+        { id: now-3, type:'credit', desc:'Starter deposit', category:'Deposit', amount:150000, date: new Date(now - 86400000*4).toISOString(), account:'Current' },
+        { id: now-2, type:'debit', desc:'Airtime top-up', category:'Airtime', amount:2000, date: new Date(now - 86400000*2).toISOString(), account:'Current' },
+        { id: now-1, type:'debit', desc:'Groceries', category:'Food', amount:14500, date: new Date(now - 86400000).toISOString(), account:'Current' }
+      ],
+      cards: [
+        { id: now, type:'virtual', last4: String(Math.floor(1000+Math.random()*8999)), frozen:false }
+      ],
+      budgets: [
+        { category:'Food', limit:40000, spent:14500 },
+        { category:'Transport', limit:20000, spent:6000 }
+      ],
+      goals: [
+        { name:'Rent renewal', target:600000, saved:80000 }
+      ],
+      notifications: [
+        { id: now, text:'Welcome to Gold Chinedu-James Bank — your account is ready.', date: new Date(now - 86400000*4).toISOString(), read:false }
+      ]
+    };
+  }
+  function pushNotification(text){
+    const user = getCurrentUser();
+    if (!user) return;
+    const notifications = [...(user.notifications||[]), { id: Date.now(), text, date: new Date().toISOString(), read:false }];
+    updateCurrentUser({ notifications });
+  }
+
+  /* ================= SIGNUP / LOGIN ================= */
+  let pendingSignup = null;
+
+  document.getElementById('signupForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const fullName = document.getElementById('signupName').value.trim();
+    const email = document.getElementById('signupEmail').value.trim().toLowerCase();
+    const password = document.getElementById('signupPassword').value;
+    const pin = document.getElementById('signupPin').value;
+    const msgEl = document.getElementById('signupMessage');
+
+    if (!fullName || !isValidEmail(email) || password.length < 4){
+      showMessage(msgEl, 'Enter your full name, a valid email, and a password of at least 4 characters.', 'error');
+      return;
+    }
+    if (!/^[0-9]{4}$/.test(pin)){
+      showMessage(msgEl, 'Your transaction PIN must be exactly 4 digits.', 'error');
+      return;
+    }
+    const users = getUsers();
+    if (users.some(u => u.email === email)){
+      showMessage(msgEl, 'An account with that email already exists. Try logging in instead.', 'error');
+      return;
+    }
+    pendingSignup = { fullName, email, password, pin };
+    document.getElementById('signupStep1Card').style.display = 'none';
+    document.getElementById('signupStep2Card').style.display = '';
+    document.getElementById('kycMessage').classList.remove('show');
+  });
+
+  function cancelKyc(){
+    pendingSignup = null;
+    document.getElementById('signupStep2Card').style.display = 'none';
+    document.getElementById('signupStep1Card').style.display = '';
+    document.getElementById('kycForm').reset();
+  }
+  function resetSignupSteps(){
+    document.getElementById('signupStep2Card').style.display = 'none';
+    document.getElementById('signupStep1Card').style.display = '';
+  }
+
+  document.getElementById('kycForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const bvn = document.getElementById('kycBvn').value.trim();
+    const nin = document.getElementById('kycNin').value.trim();
+    const msgEl = document.getElementById('kycMessage');
+    if (!/^[0-9]{11}$/.test(bvn) || !/^[0-9]{11}$/.test(nin)){
+      showMessage(msgEl, 'BVN and NIN must each be exactly 11 digits.', 'error');
+      return;
+    }
+    if (!pendingSignup) return;
+    document.getElementById('kycSpinner').classList.add('show');
+    document.getElementById('kycSubmitBtn').disabled = true;
+    document.getElementById('kycSubmitBtn').textContent = 'Verifying...';
+    setTimeout(() => {
+      const newUser = seedNewUser(pendingSignup.fullName, pendingSignup.email, pendingSignup.password, pendingSignup.pin);
+      newUser.bvnLast4 = bvn.slice(-4);
+      newUser.ninLast4 = nin.slice(-4);
+      const users = getUsers();
+      users.push(newUser);
+      saveUsers(users);
+      currentUserEmail = newUser.email;
+      localStorage.setItem(SESSION_KEY, newUser.email);
+      refreshAuthNav();
+      document.getElementById('kycSpinner').classList.remove('show');
+      document.getElementById('kycSubmitBtn').disabled = false;
+      document.getElementById('kycSubmitBtn').textContent = 'Verify and activate account';
+      document.getElementById('kycForm').reset();
+      resetSignupSteps();
+      pendingSignup = null;
+      showToast('Identity verified. Account created — welcome to Gold Chinedu-James Bank.');
+      showTab('dashboard');
+    }, 1400);
+  });
+
+  document.getElementById('loginForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+    const password = document.getElementById('loginPassword').value;
+    const msgEl = document.getElementById('loginMessage');
+    const user = getUsers().find(u => u.email === email && u.password === password);
+    if (!user){
+      showMessage(msgEl, 'We could not match that email and password.', 'error');
+      return;
+    }
+    currentUserEmail = email;
+    localStorage.setItem(SESSION_KEY, email);
+    refreshAuthNav();
+    this.reset();
+    msgEl.classList.remove('show');
+    showTab('dashboard');
+  });
+
+  function logout(){
+    currentUserEmail = null;
+    localStorage.removeItem(SESSION_KEY);
+    refreshAuthNav();
+    showTab('home');
+    showToast('You have been logged out.');
+  }
+
+  /* ================= DASHBOARD LOAD ================= */
+  function loadDashboardForUser(user){
+    if (!user) return;
+    document.getElementById('dashHeading').textContent = 'Welcome back, ' + user.fullName.split(' ')[0];
+    document.getElementById('setName').textContent = user.fullName;
+    document.getElementById('setEmail').textContent = user.email;
+    document.getElementById('ownAcctDisplay').textContent = user.accountNumber;
+    document.getElementById('acctNumberLine').textContent = 'Account · ' + user.accountNumber;
+    balanceVisible = true;
+    renderBalance(user);
+    renderOverviewTx(user);
+    renderOverviewBudgets(user);
+    renderCards(user);
+    renderBudgetsFull(user);
+    renderGoals(user);
+    renderFullHistory(user);
+    renderNotifications(user);
+    renderBillers();
+    renderInsights(user);
+  }
+
+  /* ================= NOTIFICATIONS ================= */
+  function renderNotifications(user){
+    const list = [...(user.notifications||[])].sort((a,b)=> new Date(b.date)-new Date(a.date));
+    const el = document.getElementById('notifList');
+    document.getElementById('notifDot').classList.toggle('show', list.some(n => !n.read));
+    if (!list.length){ el.innerHTML = '<div class="notif-empty">No notifications yet.</div>'; return; }
+    el.innerHTML = list.map(n => {
+      const d = new Date(n.date);
+      return `<div class="notif-item">${n.text}<small>${d.toLocaleDateString('en-NG', {day:'numeric', month:'short'})} · ${d.toLocaleTimeString('en-NG', {hour:'2-digit', minute:'2-digit'})}</small></div>`;
+    }).join('');
+  }
+  function toggleNotifPanel(){
+    const panel = document.getElementById('notifPanel');
+    panel.classList.toggle('open');
+    if (panel.classList.contains('open')){
+      const user = getCurrentUser();
+      if (user){
+        const notifications = (user.notifications||[]).map(n => ({...n, read:true}));
+        updateCurrentUser({ notifications });
+        document.getElementById('notifDot').classList.remove('show');
+      }
+    }
+  }
+  document.addEventListener('click', function(e){
+    const wrap = document.getElementById('notifWrap');
+    if (wrap && !wrap.contains(e.target)) document.getElementById('notifPanel').classList.remove('open');
+  });
+
+  /* ================= PIN MODAL ================= */
+  let _pinResolve = null;
+  function requestPin(subtitle){
+    return new Promise(resolve => {
+      _pinResolve = resolve;
+      document.getElementById('pinModalSub').textContent = subtitle || 'Confirm this payment to continue.';
+      document.getElementById('pinModalInput').value = '';
+      document.getElementById('pinModalError').classList.remove('show');
+      document.getElementById('pinModal').classList.add('open');
+      document.getElementById('pinModalInput').focus();
+    });
+  }
+  function closePinModal(){
+    document.getElementById('pinModal').classList.remove('open');
+    if (_pinResolve) _pinResolve(false);
+    _pinResolve = null;
+  }
+  function submitPinModal(){
+    const entered = document.getElementById('pinModalInput').value;
+    const user = getCurrentUser();
+    if (entered !== user.pin){
+      document.getElementById('pinModalError').classList.add('show');
+      return;
+    }
+    document.getElementById('pinModal').classList.remove('open');
+    if (_pinResolve) _pinResolve(true);
+    _pinResolve = null;
+  }
+
+  /* ================= BILLS ================= */
+  const BILLERS = [
+    { id:'airtime', label:'Airtime', glyph:'☏', category:'Airtime', field:'Phone number' },
+    { id:'data', label:'Data', glyph:'▦', category:'Data', field:'Phone number' },
+    { id:'electricity', label:'Electricity', glyph:'⚡', category:'Electricity', field:'Meter number' },
+    { id:'cable', label:'Cable TV', glyph:'▣', category:'Cable TV', field:'Smartcard number' },
+    { id:'water', label:'Water', glyph:'◐', category:'Water', field:'Account number' },
+    { id:'internet', label:'Internet', glyph:'≋', category:'Internet', field:'Account ID' }
+  ];
+  let selectedBiller = BILLERS[0];
+  function renderBillers(){
+    const el = document.getElementById('billerGrid');
+    el.innerHTML = BILLERS.map(b => `
+      <button type="button" class="biller-tile ${b.id === selectedBiller.id ? 'active' : ''}" onclick="selectBiller('${b.id}')">
+        <div class="glyph">${b.glyph}</div><div class="lbl">${b.label}</div>
+      </button>`).join('');
+    document.getElementById('billAccountLabel').textContent = selectedBiller.field;
+  }
+  function selectBiller(id){
+    selectedBiller = BILLERS.find(b => b.id === id);
+    renderBillers();
+  }
+  document.getElementById('billForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const account = document.getElementById('billAccount').value.trim();
+    const amount = Number(document.getElementById('billAmt').value);
+    const msgEl = document.getElementById('billMessage');
+    const user = getCurrentUser();
+    if (!account || !amount || amount < 100){ showMessage(msgEl, 'Enter a valid ' + selectedBiller.field.toLowerCase() + ' and an amount of at least ₦100.', 'error'); return; }
+    if (amount > user.accounts.current){ showMessage(msgEl, 'Insufficient balance in your current account for this payment.', 'error'); return; }
+    const ok = await requestPin('Confirm your ' + selectedBiller.label.toLowerCase() + ' payment of ' + fmtNaira(amount) + '.');
+    if (!ok) return;
+    const tx = { id: Date.now(), type:'debit', desc: selectedBiller.label + ' — ' + account, category: selectedBiller.category, amount, date: new Date().toISOString(), account:'Current' };
+    const budgets = (user.budgets||[]).map(b => b.category === selectedBiller.category ? { ...b, spent: b.spent + amount } : b);
+    const accounts = { ...user.accounts, current: user.accounts.current - amount };
+    updateCurrentUser({ accounts, transactions: [...user.transactions, tx], budgets });
+    pushNotification(selectedBiller.label + ' payment of ' + fmtNaira(amount) + ' was successful.');
+    const refreshed = getCurrentUser();
+    renderBalance(refreshed); renderOverviewTx(refreshed); renderFullHistory(refreshed);
+    renderBudgetsFull(refreshed); renderOverviewBudgets(refreshed); renderNotifications(refreshed); renderInsights(refreshed);
+    showMessage(msgEl, selectedBiller.label + ' payment successful.', 'success');
+    showToast('Bill paid.');
+    this.reset();
+  });
+
+  /* ================= INSIGHTS ================= */
+  function renderInsights(user){
+    const now = new Date();
+    const monthTx = user.transactions.filter(t => {
+      const d = new Date(t.date);
+      return t.type === 'debit' && d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+    });
+    const totalSpent = monthTx.reduce((s,t)=> s + t.amount, 0);
+    const totalIn = user.transactions.filter(t => {
+      const d = new Date(t.date);
+      return t.type === 'credit' && d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+    }).reduce((s,t)=> s + t.amount, 0);
+
+    document.getElementById('insightSummary').innerHTML = `
+      <div class="insight-stat"><small>Spent this month</small><div class="val">${fmtNaira(totalSpent)}</div></div>
+      <div class="insight-stat"><small>Received this month</small><div class="val">${fmtNaira(totalIn)}</div></div>
+      <div class="insight-stat"><small>Total balance</small><div class="val">${fmtNaira(user.accounts.current + user.accounts.savings)}</div></div>
+    `;
+
+    const byCat = {};
+    monthTx.forEach(t => { byCat[t.category] = (byCat[t.category]||0) + t.amount; });
+    const entries = Object.entries(byCat).sort((a,b)=> b[1]-a[1]);
+    const chartEl = document.getElementById('insightChart');
+    if (!entries.length){ chartEl.innerHTML = '<div class="empty-state">No spending recorded this month yet.</div>'; return; }
+    const max = entries[0][1];
+    chartEl.innerHTML = entries.map(([cat, amt]) => `
+      <div class="bar-chart-row">
+        <div class="lbl">${cat}</div>
+        <div class="bar-track"><div class="bar-fill" style="width:${Math.round((amt/max)*100)}%"></div></div>
+        <div class="bar-amt">${fmtNaira(amt)}</div>
+      </div>`).join('');
+  }
+
+  function renderBalance(user){
+    const curEl = document.getElementById('currentAmt');
+    const savEl = document.getElementById('savingsAmt');
+    curEl.textContent = fmtNaira(user.accounts.current);
+    savEl.textContent = fmtNaira(user.accounts.savings);
+    curEl.classList.toggle('hidden-amt', !balanceVisible);
+    savEl.classList.toggle('hidden-amt', !balanceVisible);
+  }
+  function toggleBalanceVisibility(){
+    balanceVisible = !balanceVisible;
+    document.getElementById('currentAmt').classList.toggle('hidden-amt', !balanceVisible);
+    document.getElementById('savingsAmt').classList.toggle('hidden-amt', !balanceVisible);
+    document.getElementById('eyeBtn').textContent = balanceVisible ? '◉' : '◎';
+  }
+  function moveBetweenAccounts(from, to){
+    const user = getCurrentUser();
+    const amount = 5000;
+    if (user.accounts[from] < amount){ showToast('Not enough in ' + from + ' account to move.'); return; }
+    const accounts = { ...user.accounts, [from]: user.accounts[from] - amount, [to]: user.accounts[to] + amount };
+    const now = new Date().toISOString();
+    const label = from.charAt(0).toUpperCase() + from.slice(1) + ' → ' + to.charAt(0).toUpperCase() + to.slice(1);
+    const tx = { id: Date.now(), type:'debit', desc:'Internal transfer (' + label + ')', category:'Internal transfer', amount, date: now, account: from.charAt(0).toUpperCase() + from.slice(1) };
+    updateCurrentUser({ accounts, transactions:[...user.transactions, tx] });
+    pushNotification('Moved ' + fmtNaira(amount) + ' from ' + from + ' to ' + to + '.');
+    const refreshed = getCurrentUser();
+    renderBalance(refreshed); renderOverviewTx(refreshed); renderFullHistory(refreshed); renderNotifications(refreshed); renderInsights(refreshed);
+    showToast(fmtNaira(amount) + ' moved to your ' + to + ' account.');
+  }
+
+  function txIconGlyph(category){
+    const map = { Deposit:'↓', Transfer:'⇄', Airtime:'☏', Food:'🛒', Transport:'⛟', Rent:'⌂', Salary:'↓' };
+    return map[category] || '•';
+  }
+
+  function renderOverviewTx(user){
+    const list = [...user.transactions].sort((a,b)=> new Date(b.date)-new Date(a.date)).slice(0,5);
+    const el = document.getElementById('overviewTx');
+    if (!list.length){ el.innerHTML = '<div class="empty-state">No transactions yet.</div>'; return; }
+    el.innerHTML = list.map(txRowHtml).join('');
+  }
+  function renderFullHistory(user){
+    if (!user) return;
+    populateCategoryFilter(user);
+    const search = (document.getElementById('filtSearch').value || '').toLowerCase();
+    const category = document.getElementById('filtCategory').value;
+    const from = document.getElementById('filtFrom').value;
+    const to = document.getElementById('filtTo').value;
+
+    let list = [...user.transactions];
+    if (search) list = list.filter(t => t.desc.toLowerCase().includes(search));
+    if (category) list = list.filter(t => t.category === category);
+    if (from) list = list.filter(t => new Date(t.date) >= new Date(from + 'T00:00:00'));
+    if (to) list = list.filter(t => new Date(t.date) <= new Date(to + 'T23:59:59'));
+    list.sort((a,b)=> new Date(b.date)-new Date(a.date));
+
+    const el = document.getElementById('fullTxList');
+    if (!list.length){ el.innerHTML = '<div class="empty-state">No transactions match your filters.</div>'; return; }
+    el.innerHTML = list.map(txRowHtml).join('');
+  }
+  function populateCategoryFilter(user){
+    const sel = document.getElementById('filtCategory');
+    const current = sel.value;
+    const cats = [...new Set(user.transactions.map(t => t.category))].sort();
+    sel.innerHTML = '<option value="">All</option>' + cats.map(c => `<option value="${c}">${c}</option>`).join('');
+    sel.value = cats.includes(current) ? current : '';
+  }
+  function clearTxFilters(){
+    document.getElementById('filtSearch').value = '';
+    document.getElementById('filtCategory').value = '';
+    document.getElementById('filtFrom').value = '';
+    document.getElementById('filtTo').value = '';
+    renderFullHistory(getCurrentUser());
+  }
+  function downloadStatement(){
+    const user = getCurrentUser();
+    if (!user) return;
+    const list = [...user.transactions].sort((a,b)=> new Date(a.date)-new Date(b.date));
+    const lines = [
+      'GOLD CHINEDU-JAMES BANK — ACCOUNT STATEMENT',
+      'Name: ' + user.fullName,
+      'Account number: ' + user.accountNumber,
+      'Generated: ' + new Date().toLocaleString('en-NG'),
+      'Current balance: ' + fmtNaira(user.accounts.current),
+      'Savings balance: ' + fmtNaira(user.accounts.savings),
+      '',
+      'DATE'.padEnd(14) + 'ACCOUNT'.padEnd(10) + 'TYPE'.padEnd(8) + 'CATEGORY'.padEnd(16) + 'AMOUNT'.padEnd(16) + 'DESCRIPTION',
+      '-'.repeat(90)
+    ];
+    list.forEach(t => {
+      const d = new Date(t.date).toLocaleDateString('en-NG', {day:'2-digit', month:'short', year:'numeric'});
+      lines.push(
+        d.padEnd(14) + (t.account||'Current').padEnd(10) + t.type.padEnd(8) + t.category.padEnd(16) + fmtNaira(t.amount).padEnd(16) + t.desc
+      );
+    });
+    const blob = new Blob([lines.join('\n')], { type:'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'gold-chinedu-james-bank-statement-' + user.accountNumber + '.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('Statement downloaded.');
+  }
+  function txRowHtml(t){
+    const d = new Date(t.date);
+    const dateStr = d.toLocaleDateString('en-NG', {day:'numeric', month:'short'}) + ' · ' + d.toLocaleTimeString('en-NG', {hour:'2-digit', minute:'2-digit'});
+    return `
+      <div class="tx-row">
+        <div class="tx-left">
+          <div class="tx-icon ${t.type}">${txIconGlyph(t.category)}</div>
+          <div><div class="tx-title">${t.desc}</div><div class="tx-sub">${t.category} · ${dateStr}${t.account ? '<span class="tx-sub-acct">'+t.account+'</span>' : ''}</div></div>
+        </div>
+        <div class="tx-amt ${t.type}">${t.type==='credit'?'+':'−'}${fmtNaira(t.amount)}</div>
+      </div>`;
+  }
+
+  function renderOverviewBudgets(user){
+    const el = document.getElementById('overviewBudgets');
+    if (!user.budgets.length){ el.innerHTML = '<div class="empty-state">No budgets set yet.</div>'; return; }
+    el.innerHTML = user.budgets.map(b => {
+      const pct = Math.min(100, Math.round((b.spent / b.limit) * 100));
+      const over = b.spent > b.limit;
+      return `
+        <div class="ring-row">
+          <div class="ring-info">
+            <div class="cat">${b.category}</div>
+            <div class="amts">${fmtNaira(b.spent)} of ${fmtNaira(b.limit)}</div>
+            <div class="ring-bar-track"><div class="ring-bar-fill ${over?'over':''}" style="width:${pct}%"></div></div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+  function renderBudgetsFull(user){
+    const el = document.getElementById('budgetList');
+    if (!user.budgets.length){ el.innerHTML = '<div class="empty-state">No budgets set yet. Add one to start tracking.</div>'; return; }
+    el.innerHTML = user.budgets.map(b => {
+      const pct = Math.min(100, Math.round((b.spent / b.limit) * 100));
+      const over = b.spent > b.limit;
+      return `
+        <div class="ring-row">
+          <div class="ring-info">
+            <div class="cat">${b.category}</div>
+            <div class="amts">${fmtNaira(b.spent)} of ${fmtNaira(b.limit)} ${over ? '· over limit' : ''}</div>
+            <div class="ring-bar-track"><div class="ring-bar-fill ${over?'over':''}" style="width:${pct}%"></div></div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function renderGoals(user){
+    const el = document.getElementById('goalsList');
+    if (!user.goals.length){ el.innerHTML = '<div class="empty-state">No goals yet. Create one to start saving.</div>'; return; }
+    el.innerHTML = user.goals.map((g, i) => {
+      const pct = Math.min(100, Math.round((g.saved / g.target) * 100));
+      return `
+        <div class="goal-card">
+          <div class="goal-top"><b>${g.name}</b><span>${pct}%</span></div>
+          <div class="ring-bar-track"><div class="ring-bar-fill" style="width:${pct}%"></div></div>
+          <div class="amts" style="font-family:var(--mono); font-size:.78rem; color:var(--ink-soft); margin-top:8px;">${fmtNaira(g.saved)} of ${fmtNaira(g.target)}</div>
+          <div class="card-actions">
+            <button class="btn btn-outline btn-sm" onclick="contributeToGoal(${i})">Add ₦5,000</button>
+          </div>
+        </div>`;
+    }).join('');
+  }
+  function contributeToGoal(index){
+    const user = getCurrentUser();
+    if (!user) return;
+    const amount = 5000;
+    if (user.accounts.current < amount){ showToast('Not enough in your current account to contribute.'); return; }
+    const goals = [...user.goals];
+    goals[index].saved += amount;
+    const tx = { id: Date.now(), type:'debit', desc:'Goal contribution — ' + goals[index].name, category:'Savings', amount, date: new Date().toISOString(), account:'Current' };
+    const accounts = { ...user.accounts, current: user.accounts.current - amount };
+    updateCurrentUser({ goals, accounts, transactions: [...user.transactions, tx] });
+    pushNotification('₦5,000 moved into your ' + goals[index].name + ' goal.');
+    const refreshed = getCurrentUser();
+    renderGoals(refreshed); renderBalance(refreshed); renderOverviewTx(refreshed); renderFullHistory(refreshed); renderNotifications(refreshed); renderInsights(refreshed);
+    showToast('₦5,000 added to ' + goals[index].name + '.');
+  }
+
+  document.getElementById('goalForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('goalName').value.trim();
+    const target = Number(document.getElementById('goalTarget').value);
+    const msgEl = document.getElementById('goalMessage');
+    if (!name || !target || target < 1000){ showMessage(msgEl, 'Enter a goal name and a target of at least ₦1,000.', 'error'); return; }
+    const user = getCurrentUser();
+    const goals = [...user.goals, { name, target, saved:0 }];
+    updateCurrentUser({ goals });
+    renderGoals(getCurrentUser());
+    showMessage(msgEl, 'Goal created.', 'success');
+    this.reset();
+  });
+
+  document.getElementById('budgetForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const category = document.getElementById('budgetCat').value.trim();
+    const limit = Number(document.getElementById('budgetLimit').value);
+    const msgEl = document.getElementById('budgetMessage');
+    if (!category || !limit || limit < 500){ showMessage(msgEl, 'Enter a category and a limit of at least ₦500.', 'error'); return; }
+    const user = getCurrentUser();
+    if (user.budgets.some(b => b.category.toLowerCase() === category.toLowerCase())){
+      showMessage(msgEl, 'You already have a budget for that category.', 'error'); return;
+    }
+    const budgets = [...user.budgets, { category, limit, spent:0 }];
+    updateCurrentUser({ budgets });
+    renderBudgetsFull(getCurrentUser());
+    renderOverviewBudgets(getCurrentUser());
+    showMessage(msgEl, 'Budget added.', 'success');
+    this.reset();
+  });
+
+  /* ================= CARDS ================= */
+  function renderCards(user){
+    const el = document.getElementById('cardsCarousel');
+    let html = user.cards.map((c, i) => `
+      <div class="paycard ${c.type} ${c.frozen ? 'frozen' : ''}">
+        <div class="pc-top"><span>${c.type === 'virtual' ? 'Virtual card' : 'Physical card'}</span><span>${c.frozen ? 'Frozen' : 'Active'}</span></div>
+        <div class="pc-num">•••• •••• •••• ${c.last4}</div>
+        <div class="pc-bottom">
+          <span>${user.fullName}</span>
+          <button class="btn btn-sm ${c.frozen ? 'btn-brass' : 'btn-ghost'}" style="padding:6px 12px;" onclick="toggleCardFreeze(${i})">${c.frozen ? 'Unfreeze' : 'Freeze'}</button>
+        </div>
+      </div>`).join('');
+    html += `<button class="add-card-btn" onclick="addVirtualCard()">+ New virtual card</button>`;
+    el.innerHTML = html;
+  }
+  function toggleCardFreeze(index){
+    const user = getCurrentUser();
+    const cards = [...user.cards];
+    cards[index].frozen = !cards[index].frozen;
+    updateCurrentUser({ cards });
+    renderCards(getCurrentUser());
+    showToast(cards[index].frozen ? 'Card frozen.' : 'Card unfrozen.');
+  }
+  function addVirtualCard(){
+    const user = getCurrentUser();
+    if (user.cards.length >= 4){ showToast('You can hold up to 4 cards.'); return; }
+    const cards = [...user.cards, { id: Date.now(), type:'virtual', last4: String(Math.floor(1000+Math.random()*8999)), frozen:false }];
+    updateCurrentUser({ cards });
+    renderCards(getCurrentUser());
+    showToast('New virtual card created.');
+  }
+
+  /* ================= TRANSFER ================= */
+  document.getElementById('transferForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const fromAcct = document.getElementById('xferFrom').value;
+    const acctNum = document.getElementById('xferAcct').value.trim();
+    const amount = Number(document.getElementById('xferAmt').value);
+    const note = document.getElementById('xferNote').value.trim();
+    const msgEl = document.getElementById('transferMessage');
+    const sender = getCurrentUser();
+    const fromLabel = fromAcct === 'savings' ? 'Savings' : 'Current';
+
+    if (!acctNum || !amount || amount < 100){ showMessage(msgEl, 'Enter a valid account number and an amount of at least ₦100.', 'error'); return; }
+    if (acctNum === sender.accountNumber){ showMessage(msgEl, 'You cannot transfer to your own account.', 'error'); return; }
+    if (amount > sender.accounts[fromAcct]){ showMessage(msgEl, 'Insufficient balance in your ' + fromLabel.toLowerCase() + ' account for this transfer.', 'error'); return; }
+
+    const usersCheck = getUsers();
+    const recipientCheck = usersCheck.find(u => u.accountNumber === acctNum);
+    if (!recipientCheck){ showMessage(msgEl, 'No Gold Chinedu-James Bank account found with that number.', 'error'); return; }
+
+    const ok = await requestPin('Confirm sending ' + fmtNaira(amount) + ' to ' + recipientCheck.fullName + '.');
+    if (!ok) return;
+
+    const users = getUsers();
+    const recipientIdx = users.findIndex(u => u.accountNumber === acctNum);
+    const senderIdx = users.findIndex(u => u.email === sender.email);
+    const now = new Date().toISOString();
+    users[senderIdx].accounts[fromAcct] -= amount;
+    users[senderIdx].transactions.push({ id: Date.now(), type:'debit', desc:'Transfer to ' + users[recipientIdx].fullName, category:'Transfer', amount, date: now, account: fromLabel });
+    users[recipientIdx].accounts.current += amount;
+    users[recipientIdx].transactions.push({ id: Date.now()+1, type:'credit', desc:'Transfer from ' + sender.fullName + (note ? ' — ' + note : ''), category:'Transfer', amount, date: now, account:'Current' });
+    users[recipientIdx].notifications = [...(users[recipientIdx].notifications||[]), { id: Date.now()+2, text: 'You received ' + fmtNaira(amount) + ' from ' + sender.fullName + '.', date: now, read:false }];
+    saveUsers(users);
+    pushNotification('You sent ' + fmtNaira(amount) + ' to ' + users[recipientIdx].fullName + ' from your ' + fromLabel.toLowerCase() + ' account.');
+
+    const refreshed = getCurrentUser();
+    renderBalance(refreshed); renderOverviewTx(refreshed); renderFullHistory(refreshed); renderNotifications(refreshed); renderInsights(refreshed);
+    showMessage(msgEl, `Sent ${fmtNaira(amount)} to ${users[recipientIdx].fullName}.`, 'success');
+    showToast('Transfer complete.');
+    this.reset();
+  });
+
+  function openAddMoney(){
+    const user = getCurrentUser();
+    const amount = 20000;
+    const tx = { id: Date.now(), type:'credit', desc:'Wallet top-up (simulated)', category:'Deposit', amount, date: new Date().toISOString(), account:'Current' };
+    const accounts = { ...user.accounts, current: user.accounts.current + amount };
+    updateCurrentUser({ accounts, transactions: [...user.transactions, tx] });
+    pushNotification('Wallet top-up of ' + fmtNaira(amount) + ' was successful.');
+    const refreshed = getCurrentUser();
+    renderBalance(refreshed); renderOverviewTx(refreshed); renderFullHistory(refreshed); renderNotifications(refreshed); renderInsights(refreshed);
+    showToast(fmtNaira(amount) + ' added to your balance.');
+  }
+
+  /* ================= DASH PANEL SWITCH ================= */
+  function showDashPanel(name){
+    document.querySelectorAll('.dash-tabs button').forEach(b => b.classList.toggle('active', b.dataset.dash === name));
+    document.querySelectorAll('.dash-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('dashPanel-' + name).classList.add('active');
+  }
+
+  document.getElementById('pinModalInput').addEventListener('keydown', function(e){
+    if (e.key === 'Enter'){ e.preventDefault(); submitPinModal(); }
+  });
+
+  /* ================= INIT ================= */
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
+  refreshAuthNav();
+  if (currentUserEmail && getCurrentUser()){ showTab('dashboard'); }
+</script>
+</body>
+</html>
